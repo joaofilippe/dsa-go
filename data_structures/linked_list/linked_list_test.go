@@ -1,7 +1,6 @@
 package linkedlist
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -17,28 +16,19 @@ func Test_NewLinkedListFromSlice(t *testing.T) {
 	for _, test := range tests {
 		linkedList := NewLinkedListFromSlice(test)
 
+		assert.True(t, checkLinkedList(linkedList,test), "the linked list values doesn't matche with slice values")
 		assert.NotNil(t, linkedList, "the linked_list must no be nil")
 	}
 }
 
-func Test_Tests(t *testing.T){
-	l := &LinkedList{
-		Node: &Node{
-			2,
-			&Node{
-				3,
-				&Node{
-					3,
-					&Node{
-						4,
-						nil,
-					},
-				},
-			},
-		},
+func checkLinkedList(linkedList LinkedList, slice []int) bool {
+	i := 0
+	for curr := linkedList.Node; curr.Next != nil; curr = curr.Next{
+		if curr.Value != slice[i] {
+			return false
+		}
+		i++
 	}
 
-	for curr := l.Node; curr != nil; curr = curr.Next {
-		fmt.Println(curr.Value)
-	}
+	return true
 }
