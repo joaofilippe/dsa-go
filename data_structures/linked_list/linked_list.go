@@ -30,5 +30,10 @@ func (l *LinkedList) InsertAtStart(value int) {
 
 // InsertAtEnd adds a node in the end of the list
 func (l *LinkedList) InsertAtEnd(value int) {
+	curr := l.Node.Next
+	for curr.Next != nil {
+		curr = curr.Next
+	}
 
+	curr.Next = &Node{Value: value, Next: nil}
 }
