@@ -39,6 +39,17 @@ func (l *LinkedList) InsertAtEnd(value int) {
 }
 
 // InsertAfter adds a node after the node with the index informed
-func (l *LinkedList) InsertAfter (index, value int){
+func (l *LinkedList) InsertAfter(index, value int) {
+	if index == -1 {
+		l.InsertAtStart(value)
+		return
+	}
 
+	curr := l.Node
+	for i := 0; i < index; i++ {
+		curr = curr.Next
+	}
+
+	node := &Node{Value: value, Next: curr.Next}
+	curr.Next = node
 }

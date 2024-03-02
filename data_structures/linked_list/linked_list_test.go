@@ -89,27 +89,34 @@ func Test_InsertAfter(t *testing.T) {
 	tests := []struct {
 		slice    []int
 		newValue int
-		index int
+		index    int
 		newSlice []int
 	}{
 		{
 			[]int{1, 2, 3, 4, 5, 6},
 			7,
 			3,
-			[]int{1, 2, 3, 4, 5, 6, 7},
+			[]int{1, 2, 3, 4, 7, 5, 6},
 		},
 		{
 			[]int{1, 2, 3, 4, 5, 6},
 			8,
 			4,
-			[]int{1, 2, 3, 4, 5, 6, 8},
+			[]int{1, 2, 3, 4, 5, 8, 6},
 		},
 		{
 			[]int{2, 3, 4, 5, 6},
 			1,
-			6,
-			[]int{2, 3, 4, 5, 6, 1},
+			0,
+			[]int{2, 1, 3, 4, 5, 6, 1},
 		},
+		{
+			[]int{2, 3, 4, 5, 6},
+			1,
+			-1,
+			[]int{1, 2, 3, 4, 5, 6, 1},
+		},
+		
 	}
 
 	for _, test := range tests {
