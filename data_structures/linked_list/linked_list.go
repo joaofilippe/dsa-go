@@ -37,3 +37,8 @@ func (l *LinkedList) InsertAtEnd(value int) {
 
 	curr.Next = &Node{Value: value, Next: nil}
 }
+
+// InsertAfter adds a node after the node with the index informed
+func (l *LinkedList) InsertAfter (index, value int){
+
+}

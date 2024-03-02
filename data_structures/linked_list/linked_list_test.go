@@ -86,7 +86,39 @@ func Test_InsertAtEnd(t *testing.T) {
 }
 
 func Test_InsertAfter(t *testing.T) {
+	tests := []struct {
+		slice    []int
+		newValue int
+		index int
+		newSlice []int
+	}{
+		{
+			[]int{1, 2, 3, 4, 5, 6},
+			7,
+			3,
+			[]int{1, 2, 3, 4, 5, 6, 7},
+		},
+		{
+			[]int{1, 2, 3, 4, 5, 6},
+			8,
+			4,
+			[]int{1, 2, 3, 4, 5, 6, 8},
+		},
+		{
+			[]int{2, 3, 4, 5, 6},
+			1,
+			6,
+			[]int{2, 3, 4, 5, 6, 1},
+		},
+	}
 
+	for _, test := range tests {
+		linkedList := NewLinkedListFromSlice(test.slice)
+		linkedList.InsertAfter(test.index, test.newValue)
+
+		result := checkLinkedList(linkedList, test.newSlice)
+		assert.True(t, result, "lists doesn't match")
+	}
 }
 
 func checkLinkedList(linkedList LinkedList, slice []int) bool {
