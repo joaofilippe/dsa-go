@@ -22,8 +22,13 @@ func NewLinkedListFromSlice(values []int) LinkedList {
 	return LinkedList{Node: temp.Next}
 }
 
-// AddAtStart adds a node in
+// InsertAtStart adds a node in the begging of the list
 func (l *LinkedList) InsertAtStart(value int) {
 	node := &Node{value, l.Node}
 	l.Node = node
+}
+
+// InsertAtEnd adds a node in the end of the list
+func (l *LinkedList) InsertAtEnd(value int) {
+
 }
