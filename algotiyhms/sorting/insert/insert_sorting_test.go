@@ -37,7 +37,7 @@ func (suite *SuiteBubbleSorting) Test_BubbleSortingGreaterThan() {
 	}
 
 	for i, slice := range suite.slices {
-		BubbleSorting(slice, enums.GREATER_THAN)
+		InsertionSort(slice, enums.GREATER_THAN)
 		suite.Equal(suite.expected[i], slice)
 	}
 }
@@ -52,7 +52,7 @@ func (suite *SuiteBubbleSorting) Test_BubbleSortingLessThan() {
 	}
 
 	for i, slice := range suite.slices {
-		BubbleSorting(slice, enums.LESS_THAN)
+		InsertionSort(slice, enums.LESS_THAN)
 		suite.Equal(suite.expected[i], slice)
 	}
 }

@@ -5,17 +5,17 @@ import (
 )
 
 // BubbleSorting is a func wich returns a sorted slice by bubble method
-func BubbleSorting(slice []int64, comparable enums.Comparable) []int64{
+func BubbleSorting(slice []int64, comparable enums.Comparable){
 	size := len(slice)
+					// we can't compare with slice[size+1]	
 	for i := 0; i < size - 1; i++ {
+					    // the number on the end are already great
 		for j := 0; j < size - 1 - i; j++ {
 			if comparable.Compare(slice[j], slice[j + 1]){
-				slice[j], slice[j + 1] = slice[j + 1], slice[j]
+				slice[j], slice[j + 1] = slice[j + 1], slice[j] // swap
 			}
 		}
 	}
-
-	return slice
 }
 
 /* 
