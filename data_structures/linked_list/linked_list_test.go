@@ -6,6 +6,19 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+func checkLinkedList(linkedList LinkedList, slice []int) bool {
+	i := 0
+	for curr := linkedList.Node; curr.Next != nil; curr = curr.Next {
+		if curr.Value != slice[i] {
+			return false
+		}
+		i++
+	}
+
+	return true
+}
+
+
 func Test_NewLinkedListFromSlice(t *testing.T) {
 	tests := [][]int{
 		{1, 2, 3, 4, 5, 6},
@@ -128,14 +141,45 @@ func Test_InsertAfter(t *testing.T) {
 	}
 }
 
-func checkLinkedList(linkedList LinkedList, slice []int) bool {
-	i := 0
-	for curr := linkedList.Node; curr.Next != nil; curr = curr.Next {
-		if curr.Value != slice[i] {
-			return false
-		}
-		i++
+func Test_InsertAtPosition(t *testing.T) {
+	tests := []struct {
+		slice     []int
+		position  int
+		newValue  int
+		newSlice  []int
+	}{
+		{
+			[]int{1, 2, 3, 4, 5, 6},
+			0,
+			7,
+			[]int{7, 1, 2, 3, 4, 5, 6},
+		},
+		{
+			[]int{1, 2, 3, 4, 5, 6},
+			3,
+			8,
+			[]int{1, 2, 3, 8, 4, 5, 6},
+		},
+		{
+			[]int{2, 3, 4, 5, 6},
+			5,
+			1,
+			[]int{2, 3, 4, 5, 6, 1},
+		},
+		{
+			[]int{2, 3, 4, 5, 6},
+			2,
+			9,
+			[]int{2, 3, 9, 4, 5, 6},
+		},
 	}
 
-	return true
+	for _, test := range tests {
+		linkedList := NewLinkedListFromSlice(test.slice)
+		linkedList.InsertAtPosition(test.position, test.newValue)
+
+		result := checkLinkedList(linkedList, test.newSlice)
+		assert.True(t, result, "lists doesn't match")
+	}
 }
+

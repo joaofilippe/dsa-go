@@ -53,3 +53,25 @@ func (l *LinkedList) InsertAfter(index, value int) {
 	node := &Node{Value: value, Next: curr.Next}
 	curr.Next = node
 }
+
+ // InsertAtPosition inserts a new node with the given value at the specified position in the linked list.
+// If the position is 0, it inserts the node at the start of the list.
+// If the position is greater than the length of the list, it will panic due to dereferencing a nil pointer.
+//
+// Parameters:
+//   - position: The zero-based index at which the new node should be inserted.
+//   - value: The value to be stored in the new node.
+func (l *LinkedList) InsertAtPosition(position int, value int) {
+	if position == 0 {
+		l.InsertAtStart(value)
+		return
+	}
+
+	curr := l.Node
+	for i := 0; i < position-1; i++ {
+		curr = curr.Next
+	}
+
+	node := &Node{Value: value, Next: curr.Next}
+	curr.Next = node
+}
