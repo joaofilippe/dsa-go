@@ -75,3 +75,14 @@ func (l *LinkedList) InsertAtPosition(position int, value int) {
 	node := &Node{Value: value, Next: curr.Next}
 	curr.Next = node
 }
+
+func ToSlice(l LinkedList) []int {
+	slice := []int{}
+	curr := l.Node
+	for curr != nil {
+		slice = append(slice, curr.Value)
+		curr = curr.Next
+	}
+
+	return slice
+}
