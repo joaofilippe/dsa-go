@@ -54,7 +54,7 @@ func (l *LinkedList) InsertAfter(index, value int) {
 	curr.Next = node
 }
 
- // InsertAtPosition inserts a new node with the given value at the specified position in the linked list.
+// InsertAtPosition inserts a new node with the given value at the specified position in the linked list.
 // If the position is 0, it inserts the node at the start of the list.
 // If the position is greater than the length of the list, it will panic due to dereferencing a nil pointer.
 //
@@ -76,6 +76,9 @@ func (l *LinkedList) InsertAtPosition(position int, value int) {
 	curr.Next = node
 }
 
+// ToSlice converts a LinkedList to a slice of integers.
+// It iterates through each node in the linked list, appending the value of each node to a slice.
+// The function returns the resulting slice of integers.
 func ToSlice(l LinkedList) []int {
 	slice := []int{}
 	curr := l.Node
