@@ -182,4 +182,141 @@ func Test_InsertAtPosition(t *testing.T) {
 		assert.True(t, result, "lists doesn't match")
 	}
 }
+func Test_DeleteAtPosition(t *testing.T) {
+	tests := []struct {
+		slice     []int
+		position  int
+		newSlice  []int
+	}{
+		{
+			[]int{1, 2, 3, 4, 5, 6},
+			0,
+			[]int{2, 3, 4, 5, 6},
+		},
+		{
+			[]int{1, 2, 3, 4, 5, 6},
+			3,
+			[]int{1, 2, 3, 5, 6},
+		},
+		{
+			[]int{2, 3, 4, 5, 6},
+			4,
+			[]int{2, 3, 4, 5},
+		},
+		{
+			[]int{2, 3, 4, 5, 6},
+			2,
+			[]int{2, 3, 5, 6},
+		},
+	}
+
+	for _, test := range tests {
+		linkedList := NewLinkedListFromSlice(test.slice)
+		linkedList.DeleteAtPosition(test.position)
+
+		result := checkLinkedList(linkedList, test.newSlice)
+		assert.True(t, result, "lists doesn't match")
+	}
+}
+func Test_DeleteAtEnd(t *testing.T) {
+	tests := []struct {
+		slice    []int
+		newSlice []int
+	}{
+		{
+			[]int{1, 2, 3, 4, 5, 6},
+			[]int{1, 2, 3, 4, 5},
+		},
+		{
+			[]int{1, 2, 3, 4, 5},
+			[]int{1, 2, 3, 4},
+		},
+		{
+			[]int{2, 3, 4, 5, 6},
+			[]int{2, 3, 4, 5},
+		},
+		{
+			[]int{1},
+			[]int{},
+		},
+	}
+
+	for _, test := range tests {
+		linkedList := NewLinkedListFromSlice(test.slice)
+		linkedList.DeleteAtEnd()
+
+		result := checkLinkedList(linkedList, test.newSlice)
+		assert.True(t, result, "lists doesn't match")
+	}
+}
+func Test_DeleteAtStart(t *testing.T) {
+	tests := []struct {
+		slice    []int
+		newSlice []int
+	}{
+		{
+			[]int{1, 2, 3, 4, 5, 6},
+			[]int{2, 3, 4, 5, 6},
+		},
+		{
+			[]int{1, 2, 3, 4, 5},
+			[]int{2, 3, 4, 5},
+		},
+		{
+			[]int{2, 3, 4, 5, 6},
+			[]int{3, 4, 5, 6},
+		},
+		{
+			[]int{1},
+			[]int{},
+		},
+	}
+
+	for _, test := range tests {
+		linkedList := NewLinkedListFromSlice(test.slice)
+		linkedList.DeleteAtStart()
+
+		result := checkLinkedList(linkedList, test.newSlice)
+		assert.True(t, result, "lists doesn't match")
+	}
+}
+func Test_Reverse(t *testing.T) {
+	tests := []struct {
+		slice    []int
+		expected []int
+	}{
+		{
+			[]int{1, 2, 3, 4, 5, 6},
+			[]int{6, 5, 4, 3, 2, 1},
+		},
+		{
+			[]int{1, 2, 3, 4, 5},
+			[]int{5, 4, 3, 2, 1},
+		},
+		{
+			[]int{2, 3, 4, 5, 6},
+			[]int{6, 5, 4, 3, 2},
+		},
+		{
+			[]int{1},
+			[]int{1},
+		},
+		{
+			[]int{},
+			[]int{},
+		},
+	}
+
+	for _, test := range tests {
+		linkedList := NewLinkedListFromSlice(test.slice)
+		linkedList.Reverse()
+
+		result := checkLinkedList(linkedList, test.expected)
+		assert.True(t, result, "lists doesn't match")
+	}
+}
+
+
+
+
 
