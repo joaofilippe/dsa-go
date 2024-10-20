@@ -8,23 +8,35 @@ func NewBinaryTree(rootValue int) *BinaryTree {
 	return &BinaryTree{Root: &Leaf{Value: rootValue}}
 }
 
-func (b *BinaryTree) InsertLeaf(value int) {
-	leaf := NewLeaf(value)
-	if b.Root.Left == nil {
-		b.Root.Left = leaf
-	} else if b.Root.Right == nil {
-		b.Root.Right = leaf
-	} else {
-		insertLeafRecursive(b.Root)
+
+
+func (bt *BinaryTree) Insert(value int) {
+	if bt.Root == nil {
+		bt.Root = &Leaf{Value: value}
+		return
 	}
+	insert(bt.Root, value)
 }
 
-func insertLeafRecursive(root *Leaf) {
-	if root.Left == nil {
-		root.Left = root
-	} else if root.Right == nil {
-		root.Right = root
-	} else {
-		insertLeafRecursive(root.Left)
+func insert(leaf *Leaf, value int) {
+	queue := []*Leaf{leaf}
+
+	for len(queue) > 0 {
+		current := queue[0]
+		queue = queue[1:]
+
+		if current.Left == nil {
+			current.Left = &Leaf{Value: value}
+			return
+		} else {
+			queue = append(queue, current.Left)
+		}
+
+		if current.Right == nil {
+			current.Right = &Leaf{Value: value}
+			return
+		} else {
+			queue = append(queue, current.Right)
+		}
 	}
 }
