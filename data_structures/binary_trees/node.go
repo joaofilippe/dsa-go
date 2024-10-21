@@ -6,22 +6,22 @@ type Node struct {
 	Right *Node
 }
 
-func NewLeaf(value int) *Node {
+func NewNode(value int) *Node {
 	return &Node{Value: value}
 }
 
-func (l *Node) Insert(value int) {
-	if value < l.Value {
-		if l.Left == nil {
-			l.Left = NewLeaf(value)
+func (n *Node) Insert(value int) {
+	if value < n.Value {
+		if n.Left == nil {
+			n.Left = NewNode(value)
 		} else {
-			l.Left.Insert(value)
+			n.Left.Insert(value)
 		}
 	} else {
-		if l.Right == nil {
-			l.Right = NewLeaf(value)
+		if n.Right == nil {
+			n.Right = NewNode(value)
 		} else {
-			l.Right.Insert(value)
+			n.Right.Insert(value)
 		}
 	}
 }

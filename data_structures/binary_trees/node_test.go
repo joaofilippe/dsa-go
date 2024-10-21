@@ -8,7 +8,7 @@ func TestInsertNode(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		leaf := NewLeaf(0)
+		leaf := NewNode(0)
 		leaf.Insert(test)
 
 		if leaf.Value != 0 {
