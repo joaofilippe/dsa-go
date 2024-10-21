@@ -1,39 +1,37 @@
 package binarytrees
 
 type BinaryTree struct {
-	Root *Leaf
+	Root *Node
 }
 
 func NewBinaryTree(rootValue int) *BinaryTree {
-	return &BinaryTree{Root: &Leaf{Value: rootValue}}
+	return &BinaryTree{Root: &Node{Value: rootValue}}
 }
-
-
 
 func (bt *BinaryTree) Insert(value int) {
 	if bt.Root == nil {
-		bt.Root = &Leaf{Value: value}
+		bt.Root = &Node{Value: value}
 		return
 	}
 	insert(bt.Root, value)
 }
 
-func insert(leaf *Leaf, value int) {
-	queue := []*Leaf{leaf}
+func insert(leaf *Node, value int) {
+	queue := []*Node{leaf}
 
 	for len(queue) > 0 {
 		current := queue[0]
 		queue = queue[1:]
 
 		if current.Left == nil {
-			current.Left = &Leaf{Value: value}
+			current.Left = &Node{Value: value}
 			return
 		} else {
 			queue = append(queue, current.Left)
 		}
 
 		if current.Right == nil {
-			current.Right = &Leaf{Value: value}
+			current.Right = &Node{Value: value}
 			return
 		} else {
 			queue = append(queue, current.Right)

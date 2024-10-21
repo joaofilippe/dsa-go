@@ -1,16 +1,16 @@
 package binarytrees
 
-type Leaf struct {
+type Node struct {
 	Value int
-	Left  *Leaf
-	Right *Leaf
+	Left  *Node
+	Right *Node
 }
 
-func NewLeaf(value int) *Leaf {
-	return &Leaf{Value: value}
+func NewLeaf(value int) *Node {
+	return &Node{Value: value}
 }
 
-func (l *Leaf) Insert(value int) {
+func (l *Node) Insert(value int) {
 	if value < l.Value {
 		if l.Left == nil {
 			l.Left = NewLeaf(value)
