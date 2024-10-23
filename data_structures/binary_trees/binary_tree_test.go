@@ -113,3 +113,21 @@ func TestBinaryTree_Insert(t *testing.T) {
 		tree.Root.Right.Right.Value,
 	)
 }
+func TestBinaryTree_PreOrder(t *testing.T) {
+	tree := NewBinaryTree(10)
+	expected := []int{10}
+	assert.Equal(t, expected, tree.PreOrder(), "Expected pre-order traversal %v, got %v", expected, tree.PreOrder())
+
+	tree.Insert(5)
+	tree.Insert(15)
+	expected = []int{10, 5, 15}
+	assert.Equal(t, expected, tree.PreOrder(), "Expected pre-order traversal %v, got %v", expected, tree.PreOrder())
+
+	tree.Insert(3)
+	tree.Insert(7)
+	tree.Insert(12)
+	tree.Insert(18)
+	expected = []int{10, 5, 3, 7, 15, 12, 18}
+	assert.Equal(t, expected, tree.PreOrder(), "Expected pre-order traversal %v, got %v", expected, tree.PreOrder())
+}
+
