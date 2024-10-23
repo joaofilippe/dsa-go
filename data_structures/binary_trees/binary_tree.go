@@ -38,3 +38,73 @@ func insert(leaf *Node, value int) {
 		}
 	}
 }
+
+func (bt *BinaryTree) PreOrder() []int {
+	if bt.Root == nil {
+		return []int{}
+	}
+
+	result := new([]int)	
+	*result = append(*result, bt.Root.Value)
+	preOrder(bt.Root.Left, result)
+	preOrder(bt.Root.Right, result)
+
+	return *result
+}
+
+func preOrder(node *Node, result *[]int) {
+	if node == nil {
+		return
+	}
+
+	*result = append(*result, node.Value)
+	preOrder(node.Left, result)
+	preOrder(node.Right, result)
+}
+
+func (bt *BinaryTree) InOrder() []int {
+	if bt.Root == nil {
+		return []int{}
+	}
+
+	result := new([]int)
+	inOrder(bt.Root.Left, result)
+	*result = append(*result, bt.Root.Value)
+	inOrder(bt.Root.Right, result)
+
+	return *result
+}
+
+func inOrder(node *Node, result *[]int) {
+	if node == nil {
+		return
+	}
+
+	inOrder(node.Left, result)
+	*result = append(*result, node.Value)
+	inOrder(node.Right, result)
+}
+
+func (bt *BinaryTree) PostOrder() []int {
+	if bt.Root == nil {
+		return []int{}
+	}
+
+	result := new([]int)
+	postOrder(bt.Root.Left, result)
+	postOrder(bt.Root.Right, result)
+	*result = append(*result, bt.Root.Value)
+
+	return *result
+}
+
+func postOrder(node *Node, result *[]int) {
+	if node == nil {
+		return
+	}
+
+	postOrder(node.Left, result)
+	postOrder(node.Right, result)
+	*result = append(*result, node.Value)
+}
+
