@@ -25,3 +25,18 @@ func (n *Node) Insert(value int) {
 		}
 	}
 }
+
+func (n *Node) GetNodeHeight() int {
+	if n == nil {
+		return 0
+	}
+
+	leftHeight := n.Left.GetNodeHeight()
+	rightHeight := n.Right.GetNodeHeight()
+
+	if leftHeight > rightHeight {
+		return leftHeight + 1
+	}
+
+	return rightHeight + 1
+}
