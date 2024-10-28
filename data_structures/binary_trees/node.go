@@ -1,27 +1,31 @@
 package binarytrees
 
 type Node struct {
+	Key   int
 	Value int
 	Left  *Node
 	Right *Node
 }
 
-func NewNode(value int) *Node {
-	return &Node{Value: value}
+func NewNode(key, value int) *Node {
+	return &Node{
+		Key:   key,
+		Value: value,
+	}
 }
 
-func (n *Node) Insert(value int) {
+func (n *Node) Insert(key, value int) {
 	if value < n.Value {
 		if n.Left == nil {
-			n.Left = NewNode(value)
+			n.Left = NewNode(key, value)
 		} else {
-			n.Left.Insert(value)
+			n.Left.Insert(key, value)
 		}
 	} else {
 		if n.Right == nil {
-			n.Right = NewNode(value)
+			n.Right = NewNode(key, value)
 		} else {
-			n.Right.Insert(value)
+			n.Right.Insert(key, value)
 		}
 	}
 }

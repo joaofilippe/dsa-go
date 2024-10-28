@@ -7,9 +7,9 @@ func TestInsertNode(t *testing.T) {
 		1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
 	}
 
-	for _, test := range tests {
-		leaf := NewNode(0)
-		leaf.Insert(test)
+	for i, test := range tests {
+		leaf := NewNode(0, 0)
+		leaf.Insert(i, test)
 
 		if leaf.Value != 0 {
 			t.Errorf("Expected root value to be 0, got %d", leaf.Value)
@@ -34,10 +34,10 @@ func TestHeight(t *testing.T) {
 		{[]int{1, 2, 3, 4, 5}, 6},
 	}
 
-	for _, test := range tests {
-		root := NewNode(0)
+	for i, test := range tests {
+		root := NewNode(i, 0)
 		for _, value := range test.values {
-			root.Insert(value)
+			root.Insert(i, value)
 		}
 
 		if height := root.Height(); height != test.expected {
