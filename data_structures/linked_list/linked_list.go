@@ -1,15 +1,12 @@
 package linkedlist
 
+import "fmt"
+
 // NewLinkedListFromSlice returns a linked list of nodes from an array of integers
 func NewLinkedListFromSlice(values []int) LinkedList {
 	temp := new(Node)
 	for i := 0; i < len(values); i++ {
 		node := &Node{Value: values[i]}
-
-		if temp == nil {
-			temp = node
-			continue
-		}
 
 		curr := temp
 		for curr.Next != nil {
@@ -20,6 +17,20 @@ func NewLinkedListFromSlice(values []int) LinkedList {
 	}
 
 	return LinkedList{Node: temp.Next}
+}
+
+func (l *LinkedList) Print() error {
+	if l.Node == nil {
+		return fmt.Errorf("list is empty")
+	}
+
+	current := l.Node
+	for current != nil {
+		fmt.Printf("%v", current.Value)
+		current = current.Next
+	}
+	
+	return nil
 }
 
 // InsertAtStart adds a node in the begging of the list
