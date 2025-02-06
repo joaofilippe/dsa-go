@@ -1,6 +1,10 @@
 package linkedlist
 
 import (
+	"bytes"
+	"io"
+	"log"
+	"os"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -17,7 +21,6 @@ func checkLinkedList(linkedList LinkedList, slice []int) bool {
 
 	return true
 }
-
 
 func Test_NewLinkedListFromSlice(t *testing.T) {
 	tests := [][]int{
@@ -129,7 +132,6 @@ func Test_InsertAfter(t *testing.T) {
 			-1,
 			[]int{1, 2, 3, 4, 5, 6, 1},
 		},
-		
 	}
 
 	for _, test := range tests {
@@ -143,10 +145,10 @@ func Test_InsertAfter(t *testing.T) {
 
 func Test_InsertAtPosition(t *testing.T) {
 	tests := []struct {
-		slice     []int
-		position  int
-		newValue  int
-		newSlice  []int
+		slice    []int
+		position int
+		newValue int
+		newSlice []int
 	}{
 		{
 			[]int{1, 2, 3, 4, 5, 6},
@@ -184,9 +186,9 @@ func Test_InsertAtPosition(t *testing.T) {
 }
 func Test_DeleteAtPosition(t *testing.T) {
 	tests := []struct {
-		slice     []int
-		position  int
-		newSlice  []int
+		slice    []int
+		position int
+		newSlice []int
 	}{
 		{
 			[]int{1, 2, 3, 4, 5, 6},
@@ -316,7 +318,119 @@ func Test_Reverse(t *testing.T) {
 	}
 }
 
+func Test_Print(t *testing.T) {
+	tests := []struct {
+		slice    []int
+		expected string
+	}{
+		{
+			[]int{1, 2, 3, 4, 5, 6},
+			"123456",
+		},
+		{
+			[]int{1, 2, 3, 4, 5},
+			"12345",
+		},
+		{
+			[]int{2, 3, 4, 5, 6},
+			"23456",
+		},
+		{
+			[]int{1},
+			"1",
+		},
+		{
+			[]int{},
+			"",
+		},
+	}
 
+	for _, test := range tests {
+		linkedList := NewLinkedListFromSlice(test.slice)
+		output := captureOutput(func() {
+			err := linkedList.Print()
+			assert.Nil(t, err)
+		})
+		assert.Equal(t, test.expected, output)
+	}
+}
 
+func Test_ToSlice(t *testing.T) {
+	tests := []struct {
+		slice    []int
+		expected []int
+	}{
+		{
+			[]int{1, 2, 3, 4, 5, 6},
+			[]int{1, 2, 3, 4, 5, 6},
+		},
+		{
+			[]int{1, 2, 3, 4, 5},
+			[]int{1, 2, 3, 4, 5},
+		},
+		{
+			[]int{2, 3, 4, 5, 6},
+			[]int{2, 3, 4, 5, 6},
+		},
+		{
+			[]int{1},
+			[]int{1},
+		},
+		{
+			[]int{},
+			[]int{},
+		},
+	}
 
+	for _, test := range tests {
+		linkedList := NewLinkedListFromSlice(test.slice)
+		result := ToSlice(linkedList)
+		assert.Equal(t, test.expected, result)
+	}
+}
 
+func Test_Length(t *testing.T) {
+	tests := []struct {
+		slice    []int
+		expected int
+	}{
+		{
+			[]int{1, 2, 3, 4, 5, 6},
+			6,
+		},
+		{
+			[]int{1, 2, 3, 4, 5},
+			5,
+		},
+		{
+			[]int{2, 3, 4, 5, 6},
+			5,
+		},
+		{
+			[]int{1},
+			1,
+		},
+		{
+			[]int{},
+			0,
+		},
+	}
+
+	for _, test := range tests {
+		linkedList := NewLinkedListFromSlice(test.slice)
+		result := linkedList.Length()
+		assert.Equal(t, test.expected, result)
+	}
+}
+
+// Helper function to capture output
+func captureOutput(f func()) string {
+	var buf bytes.Buffer
+	writer := io.Writer(&buf)
+	log.SetOutput(writer)
+	defer func() {
+		log.SetOutput(os.Stdout)
+	}()
+	f()
+	return buf.String()
+}
