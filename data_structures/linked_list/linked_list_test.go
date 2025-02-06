@@ -136,7 +136,7 @@ func Test_InsertAfter(t *testing.T) {
 
 	for _, test := range tests {
 		linkedList := NewLinkedListFromSlice(test.slice)
-		linkedList.InsertAfter(test.index, test.newValue)
+		linkedList.Insert(test.index, test.newValue)
 
 		result := checkLinkedList(linkedList, test.newSlice)
 		assert.True(t, result, "lists doesn't match")

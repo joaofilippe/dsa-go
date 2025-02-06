@@ -29,7 +29,7 @@ func (l *LinkedList) Print() error {
 		fmt.Printf("%v", current.Value)
 		current = current.Next
 	}
-	
+
 	return nil
 }
 
@@ -49,8 +49,8 @@ func (l *LinkedList) InsertAtEnd(value int) {
 	curr.Next = &Node{Value: value, Next: nil}
 }
 
-// InsertAfter adds a node after the node with the index informed
-func (l *LinkedList) InsertAfter(index, value int) {
+// Insert adds a node after the node with the index informed
+func (l *LinkedList) Insert(index, value int) {
 	if index == -1 {
 		l.InsertAtStart(value)
 		return
@@ -124,7 +124,7 @@ func (l *LinkedList) DeleteAtEnd() {
 // If the position is 0, it deletes the node at the start of the list.
 // If the position is greater than 0, it traverses the list to find the node at the given position
 // and removes it by updating the pointers of the previous node.
-// 
+//
 // Parameters:
 //   position (int): The zero-based index of the node to be deleted.
 //
