@@ -11,7 +11,7 @@ func TestQuickSorting(t *testing.T) {
 		input    []int
 		expected []int
 	}{
-		{input: []int{3, 6, 8, 10, 1, 2, 1}, expected: []int{1, 1, 2, 3, 6, 8, 10}},
+		{input: []int{3, 6, 8, 10, 1, 2, 5}, expected: []int{1, 2, 3, 5, 6, 8, 10}},
 		{input: []int{1, 2, 3, 4, 5}, expected: []int{1, 2, 3, 4, 5}},
 		{input: []int{5, 4, 3, 2, 1}, expected: []int{1, 2, 3, 4, 5}},
 		{input: []int{}, expected: []int{}},
