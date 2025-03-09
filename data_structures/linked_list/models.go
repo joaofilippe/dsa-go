@@ -5,6 +5,7 @@ type LinkedList struct {
 }
 
 type Node struct {
+	Index int
 	Value int
 	Next *Node
 }

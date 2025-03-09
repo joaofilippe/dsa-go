@@ -44,9 +44,9 @@ func Test_InsertAtStart(t *testing.T) {
 		newSlice []int
 	}{
 		{
-			[]int{1, 2, 3, 4, 5, 6},
+			[]int{1, 5, 3, 4, 2, 6},
 			7,
-			[]int{7, 1, 2, 3, 4, 5, 6},
+			[]int{7, 1, 5, 3, 4, 2, 6},
 		},
 		{
 			[]int{1, 2, 3, 4, 5, 6},

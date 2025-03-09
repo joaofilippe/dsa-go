@@ -6,7 +6,10 @@ import "fmt"
 func NewLinkedListFromSlice(values []int) LinkedList {
 	temp := new(Node)
 	for i := 0; i < len(values); i++ {
-		node := &Node{Value: values[i]}
+		node := &Node{
+			Index: i,
+			Value: values[i],
+		}
 
 		curr := temp
 		for curr.Next != nil {
@@ -35,8 +38,18 @@ func (l *LinkedList) Print() error {
 
 // InsertAtStart adds a node in the begging of the list
 func (l *LinkedList) InsertAtStart(value int) {
-	node := &Node{value, l.Node}
+	node := &Node{0,value, l.Node}
 	l.Node = node
+	
+	curr := l.Node
+	index := 0
+	curr.Index = index
+
+	for curr.Next != nil {
+		curr = curr.Next
+		index++
+		curr.Index = index
+	}
 }
 
 // InsertAtEnd adds a node in the end of the list
